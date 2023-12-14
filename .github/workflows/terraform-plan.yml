@@ -1,0 +1,20 @@
+name: terraform-plan
+
+on: push
+
+jobs:
+  run-terraform-plan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - run: terraform --version
+
+    - name: run terraform plan
+      continue-on-error: true
+      run: |
+        cd terraform
+        terraform init
+        terraform plan 2> /dev/null
